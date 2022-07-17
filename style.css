@@ -1,0 +1,270 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  font-size: 14px;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+.crypto {
+}
+
+.crypto__container {
+  max-width: 1000px;
+  padding: 0 15px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.crypto__header {
+}
+
+.header-crypto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-crypto__title {
+  font-size: 1.5rem;
+  margin: 20px auto;
+}
+
+.header-crypto__select{
+  margin: 0 0 1rem 0;
+}
+
+.header-crypto__select span{
+  opacity: 0.7;
+  font-size: 1.5rem;
+}
+
+.header-crypto__title span {
+  color: red;
+}
+
+.header-crypto__search {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search__input {
+  margin: 0 0 0 0;
+  outline: none;
+  border: 3px solid #fc0;
+  display: block;
+  width: 100%;
+  color: #2c3e50;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.6em 0 0 0.6em;
+  font-size: 1rem;
+}
+
+.crypto__message {
+  color: red;
+}
+
+.crypto__helper {
+  margin: 1rem 0;
+}
+
+.helper-crypto__steers {
+  display: flex;
+  gap: 1rem;
+}
+
+.helper-crypto__steer {
+  background-color: #ccc;
+  margin: 0 0 0 0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.crypto__filter {
+  display: flex;
+}
+
+.crypto__filter span {
+  opacity: 0.7;
+  font-size: 1.5rem;
+}
+
+.filter-crypto__buttons {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.filter-crypto__button .filter-crypto__button.button {
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+}
+
+.filter-crypto__button_disabled {
+  opacity: 0.5;
+}
+
+.search__button.button {
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.button {
+  color: black;
+  position: relative;
+  border-radius: 0.6rem;
+  letter-spacing: 0.05em;
+  border: 1px solid #fc0;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #fc0;
+  transition: all 0.22s;
+  padding: 0 10px 0 10px;
+  cursor: pointer;
+}
+
+/*-------------------cell-------------------*/
+
+.crypto__tickers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.crypto__ticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #fc0;
+  padding: 2em;
+  margin: 5px;
+}
+.crypto__ticker.absent{
+  background-color: #FFCABF;
+}
+.crypto__ticker.border-strong {
+  border: 3px solid #fc0;
+}
+
+.ticker-crypto {
+}
+.ticker-crypto__currency {
+  font-size: 18px;
+  opacity: 0.5;
+  margin: 0.5em 0;
+}
+.ticker-crypto__value {
+  margin: 0 0 0.5em 0;
+  font-size: 1.2rem;
+}
+.ticker-crypto__button {
+  color: #c25205;
+  border-color: #c25205;
+  padding: 0.5em 1.7em;
+}
+.button {
+}
+.crypto__page{
+  text-align: center;
+  opacity: 0.7;
+  font-size: 1rem;
+}
+/*--------diagram-------------------------*/
+.crypto__diagram {
+  display: flex;
+  position: relative;
+  height: 64px;
+  gap: 0.2em;
+  align-items: flex-end;
+  min-height: 10rem;
+  border-bottom: 1px solid #2c3e50;
+  border-left: 1px solid #2c3e50;
+  padding: 0 0 5px 5px;
+}
+
+.crypto__column {
+  background-color: #fc0;
+  width: 2rem;
+}
+
+.delete-graph {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  color: #c25205;
+  border-color: #c25205;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>CryptoTrade</title>
+    <link rel="stylesheet" href="/style.css" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  </head>
+
+  <body>
+    <div class="crypto__container">
+      <div class="crypto__header header-crypto">
+        <div class="header-crypto__title">
+          <h2>Crypto<span>Trade</span></h2>
+        </div>
+        <div class="header-crypto__select">
+          <span>Выберите валюту: </span>
+          <select v-model="currency" name="currency" id="">
+            <option value="USD">USD</option>
+            <option value="RUB">RUB</option>
+            <option value="EUR">EUR</option>
+            <option value="KZT">KZT</option>
+          </select>
+        </div>
+        <div class="header-crypto__search search">
+          <input
+            v-on:keydown.enter="addTicker()"
+            v-model="tickerInput"
+            type="text"
+            placeholder="Например BTC"
+            class="search__input"
+          />
+          <button
+            v-on:click="addTicker()"
+            class="search__button button"
+            type="button"
+          >
+            Добавить
+          </button>
+        </div>
+      </div>
+      <div class="crypto__messages">
+        <h3 v-if="hasSameTicker" class="crypto__message">
+          Такой тикер уже добавлен
+        </h3>
+        <h3 v-if="noExistMessage" class="crypto__message">
+          Такого тикера не существует
+        </h3>
+      </div>
+      <div class="crypto__helper helper-crypto">
+        <ul class="helper-crypto__steers">
+          <li
+            v-on:click="addSteer(steer)"
+            v-if="this.tickerInput != 0"
+            v-for="(steer, idx) in steers"
+            :key="steer"
+            class="helper-crypto__steer"
+          >
+            {{ steer }}
+          </li>
+        </ul>
+      </div>
+      <div class="crypto__filter filter-crypto">
+        <div class="filter-crypto__input">
+          <span>Фильтр:</span> <input v-model="filter" type="text" />
+        </div>
+        <div class="filter-crypto__buttons">
+          <button
+            v-on:click="this.page--"
+            v-bind:disabled="this.page === 1"
+            v-bind:class="{'filter-crypto__button_disabled': this.page === 1}"
+            class="filter-crypto__button button"
+          >
+            Назад</button
+          ><button
+            v-on:click="this.page++"
+            v-bind:class="{'filter-crypto__button_disabled': !hasNextPage}"
+            class="filter-crypto__button button"
+          >
+            Вперед
+          </button>
+        </div>
+      </div>
+      <hr />
+      <ul class="crypto__tickers">
+        <li
+          v-on:click="select(tick)"
+          v-bind:class="{ 'border-strong': selectedTicker == tick, 'absent': tick.hasPrice }"
+          v-for="tick in paginatedTickers"
+          :key="tick"
+          class="crypto__ticker ticker-crypto"
+        >
+          <div class="ticker-crypto__currency">{{ tick.name }}</div>
+          <div class="ticker-crypto__value">
+            {{ formatPrice(tick.price) }} {{currency}}
+          </div>
+          <button
+            v-on:click.stop="deleteTicker(tick)"
+            class="ticker-crypto__button button"
+            type="button"
+          >
+            Удалить
+          </button>
+        </li>
+      </ul>
+      <p v-if="filteredTickers != 0" class="crypto__page">Страница: {{page}}</p>
+      <hr v-if="filteredTickers != 0" />
+      <div v-if="selectedTicker" class="crypto__graph">
+        <h3>{{ selectedTicker.name }} - {{currency}}</h3>
+        <div class="crypto__diagram">
+          <div
+            v-bind:style="{ height: `${column}%` }"
+            v-for="(column, idx) in normalizedGraph"
+            :key="idx"
+            class="crypto__column"
+          ></div>
+          <button
+            v-on:click="deleteGraph()"
+            type="button"
+            class="button delete-graph"
+          >
+            удалить
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
