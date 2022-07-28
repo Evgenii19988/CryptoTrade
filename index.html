@@ -93,6 +93,12 @@
           <div class="ticker-crypto__value">
             {{ formatPrice(tick.price) }} {{currency}}
           </div>
+          <div class="ticker-crypto__image">
+            <img
+              v-bind:src="getTickerImage(tick.name)"
+              v-bind:alt="tick.name"
+            />
+          </div>
           <button
             v-on:click.stop="deleteTicker(tick)"
             class="ticker-crypto__button button"

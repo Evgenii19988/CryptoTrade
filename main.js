@@ -20,7 +20,7 @@ const App = {
 
       page: 1,
 
-      currency: "USD",
+      currency: "USD"
     };
   },
 
@@ -30,8 +30,6 @@ const App = {
     },
 
     addTicker() {
-      /*--- 2) Как можно зарефакторить данные две проверки или и так норм?---*/
-
       if (!Object.keys(this.coinList).includes(this.tickerInput)) {
         this.showMessage();
         return;
@@ -47,23 +45,17 @@ const App = {
       const currentTicker = {
         name: this.tickerInput,
         price: "-",
-        hasPrice: false,
+        hasPrice: false
       };
 
       this.tickers = [...this.tickers, currentTicker];
 
       this.tickerInput = "";
-
-      /*this.addTickerImg(currentTicker.name)*/
     },
-    /* 1) ---Не тянется картинка по URL из за corse. Можно ли пофиксить? ---
 
-    /*  async addTickerImg(tickerName) {
-      const imgUrl = `https://www.cryptocompare.com${this.coinList[tickerName].ImageUrl}`;
-      const response = await fetch(imgUrl, {headers:{}})
-
-      console.log(response)
-    },*/
+    getTickerImage(tickerName) {
+      return `https://www.cryptocompare.com${this.coinList[tickerName].ImageUrl}`;
+    },
 
     deleteTicker(removeTicker) {
       this.tickers = this.tickers.filter((t) => t !== removeTicker);
@@ -130,7 +122,6 @@ const App = {
     },
 
     markTickersWithoutPrice() {
-      /* ---Данная функция красит тикеры, на которые не приходит цена в красный(для примера тикер ZABAKU) Можно ли зарефакторить или тоже норм?---*/
       const tickersWithoutPrice = this.tickers.filter(
         (ticker) => ticker.price === undefined
       );
@@ -141,7 +132,7 @@ const App = {
         (ticker) => ticker.price !== undefined
       );
       tickersWithPrice.map((tick) => (tick.hasPrice = false));
-    },
+    }
   },
 
   computed: {
@@ -182,7 +173,7 @@ const App = {
 
     hasSameTicker() {
       return this.tickersNames.includes(this.tickerInput) ? true : false;
-    },
+    }
   },
 
   watch: {
@@ -215,7 +206,7 @@ const App = {
     filter: function (newValue) {
       this.filter = newValue.toUpperCase();
       this.page = 1;
-    },
+    }
   },
 
   created() {
@@ -228,10 +219,7 @@ const App = {
     setInterval(() => this.updateTickers(), 5000);
   },
 
-  mounted() {},
+  mounted() {}
 };
 
 Vue.createApp(App).mount(".crypto__container");
-/* Общие вопросы:
-1) Какие блоки лучше вынести в отдельные компоненты? (Все подключену через CDN, тк нет возможности установить ноду)
-2) Еще какие явные замечания?*/
